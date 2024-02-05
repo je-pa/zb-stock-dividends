@@ -15,5 +15,5 @@ public interface DividendRepository extends JpaRepository<DividendEntity, Long> 
     @Transactional
     void deleteAllByCompanyId(Long id);
 
-    boolean existsByCompanyIdAndDate(Long companyId, LocalDateTime date);
+    boolean existsByCompanyIdAndDate(Long companyId, LocalDateTime date); // unique key
 }
