@@ -15,32 +15,13 @@ public class ZbStockDividendsApplication {
 
     public static void main(String[] args) {
 //        SpringApplication.run(ZbStockDividendsApplication.class, args);
-        // jsoup.org/apidocs
-        Connection connection = Jsoup.connect("https://finance.yahoo.com/quote/COKE/history?period1=99100800&period2=1707004800&interval=1mo&filter=history&frequency=1mo&includeAdjustedClose=true");
-        try {
-            Document document = connection.get();
-            Elements elements = document.getElementsByAttributeValue("data-test", "historical-prices");
-            Element element = elements.get(0);
-            Element tbody = element.children().get(1);
+        AutoComplete autoComplete = new AutoComplete();
+        AutoComplete autoComplete1 = new AutoComplete();
 
-            for (Element e : tbody.children()) {
-                String txt = e.text();
-                if (!txt.endsWith("Dividend")) {
-                    continue;
-                }
+        autoComplete.add("hello");
 
-                String[] splits = txt.split(" ");
-                String month = splits[0];
-                int day = Integer.valueOf(splits[1].replace(",", ""));
-                int year = Integer.valueOf(splits[2]);
-                String dividend = splits[3];
-
-                System.out.println(year + "/" + month + "/" + day + "->" + dividend);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        System.out.println(autoComplete.get("hello"));
+        System.out.println(autoComplete1.get("hello"));
     }
 
 }
