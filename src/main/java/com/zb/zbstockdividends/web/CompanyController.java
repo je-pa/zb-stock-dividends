@@ -31,11 +31,12 @@ public class CompanyController {
      * @param keyword
      * @return
      */
-//    @GetMapping("/autocomplete")
-//    public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
+    @GetMapping("/autocomplete")
+    public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
+        var result = this.companyService.autocomplete(keyword);
 //        var result = this.companyService.getCompanyNamesByKeyword(keyword);
-//        return ResponseEntity.ok(result);
-//    }
+        return ResponseEntity.ok(result);
+    }
 
     /**
      * 회사 목록 조회
@@ -63,7 +64,7 @@ public class CompanyController {
         }
 
         Company company = this.companyService.save(ticker);
-//        this.companyService.addAutocompleteKeyword(company.getName());
+        this.companyService.addAutocompleteKeyword(company.getName());
         return ResponseEntity.ok(company);
     }
 
