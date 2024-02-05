@@ -33,8 +33,8 @@ public class CompanyController {
      */
     @GetMapping("/autocomplete")
     public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
-        var result = this.companyService.autocomplete(keyword);
-//        var result = this.companyService.getCompanyNamesByKeyword(keyword);
+//        var result = this.companyService.autocomplete(keyword);
+        var result = this.companyService.getCompanyNamesByKeyword(keyword);
         return ResponseEntity.ok(result);
     }
 
@@ -64,7 +64,6 @@ public class CompanyController {
         }
 
         Company company = this.companyService.save(ticker);
-        this.companyService.addAutocompleteKeyword(company.getName());
         return ResponseEntity.ok(company);
     }
 
