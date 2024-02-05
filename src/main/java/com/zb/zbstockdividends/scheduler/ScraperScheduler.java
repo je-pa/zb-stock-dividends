@@ -29,15 +29,6 @@ public class ScraperScheduler {
     private final Scraper yahooFinanceScraper;
 
 //    @CacheEvict(value = CacheKey.KEY_FINANCE, allEntries = true)
-    @Scheduled(fixedDelay = 1000)
-    public void test1() throws InterruptedException{
-        Thread.sleep(10000);
-        System.out.println(Thread.currentThread().getName() + "-> 테스트 1 : "+ LocalDateTime.now());
-    }
-    @Scheduled(fixedDelay = 1000)
-    public void test2() throws InterruptedException{
-        System.out.println(Thread.currentThread().getName() + "-> 테스트 2 : "+ LocalDateTime.now());
-    }
     @Scheduled(cron = "${scheduler.scrap.yahoo}") // 매일 정각
     public void yahooFinanceScheduling() {
         log.info("scraping scheduler is started");
