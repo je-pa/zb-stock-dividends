@@ -1,6 +1,6 @@
 spring:
   application:
-    name: dayone-financial
+    name: zb-stock-dividends
 
   h2:
     console:
@@ -15,7 +15,7 @@ spring:
 
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:dayone;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:test
     username: sa
     password:
 

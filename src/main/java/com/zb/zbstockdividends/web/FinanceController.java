@@ -1,4 +1,4 @@
-package com.dayone.web;
+package com.zb.zbstockdividends.web;
 
 import com.zb.zbstockdividends.model.ScrapedResult;
 import com.zb.zbstockdividends.service.FinanceService;
