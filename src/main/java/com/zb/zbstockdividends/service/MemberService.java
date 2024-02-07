@@ -1,5 +1,6 @@
 package com.zb.zbstockdividends.service;
 
+import com.zb.zbstockdividends.exception.impl.AlreadyExistUserException;
 import com.zb.zbstockdividends.model.Auth;
 import com.zb.zbstockdividends.persist.MemberRepository;
 import com.zb.zbstockdividends.persist.entity.MemberEntity;
@@ -30,7 +31,7 @@ public class MemberService implements UserDetailsService {
         // 아이디가 존재하는 경우 exception 발생
         boolean exists = this.memberRepository.existsByUsername(member.getUsername());
         if (exists) {
-            throw new RuntimeException("이미 사용 중인 아이디 입니다.");
+            throw new AlreadyExistUserException();
         }
 
         // ID 생성 가능한 경우, 멤버 테이블에 저장

@@ -1,5 +1,6 @@
 package com.zb.zbstockdividends.service;
 
+import com.zb.zbstockdividends.exception.impl.NoCompanyException;
 import com.zb.zbstockdividends.model.Company;
 import com.zb.zbstockdividends.model.ScrapedResult;
 import com.zb.zbstockdividends.persist.CompanyRepository;
@@ -88,7 +89,7 @@ public class CompanyService {
     public String deleteCompany(String ticker) {
         // 1. 배당금 정보 삭제
         CompanyEntity company = this.companyRepository.findByTicker(ticker)
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 회사입니다."));
+                .orElseThrow(() -> new NoCompanyException());
         // 2. 회사 정보 삭제
         this.dividendRepository.deleteAllByCompanyId(company.getId());
         this.companyRepository.delete(company);
