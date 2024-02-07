@@ -2,6 +2,7 @@ package com.zb.zbstockdividends.scheduler;
 
 import com.zb.zbstockdividends.model.Company;
 import com.zb.zbstockdividends.model.ScrapedResult;
+import com.zb.zbstockdividends.model.constants.CacheKey;
 import com.zb.zbstockdividends.persist.CompanyRepository;
 import com.zb.zbstockdividends.persist.DividendRepository;
 import com.zb.zbstockdividends.persist.entity.CompanyEntity;
@@ -14,12 +15,11 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
 @Component
-@EnableCaching
+@EnableCaching // 캐시 허용
 @AllArgsConstructor
 public class ScraperScheduler {
 
@@ -28,7 +28,7 @@ public class ScraperScheduler {
 
     private final Scraper yahooFinanceScraper;
 
-//    @CacheEvict(value = CacheKey.KEY_FINANCE, allEntries = true)
+    @CacheEvict(value = CacheKey.KEY_FINANCE, allEntries = true) // 레디스 캐시 값 모두 지워준다.
     @Scheduled(cron = "${scheduler.scrap.yahoo}") // 매일 정각
     public void yahooFinanceScheduling() {
         log.info("scraping scheduler is started");

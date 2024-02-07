@@ -23,8 +23,11 @@ public class FinanceService {
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
+    // 요청이 자주 들어오는가?
+    // 자주 변경이 되는 데이터인가?
     @Cacheable(key = "#companyName", value = CacheKey.KEY_FINANCE)
     public ScrapedResult getDividendByCompanyName(String companyName) {
+        log.info("search company ->"+companyName);
         // 1. 회사명을 기준으로 회사 정보를 조회
         CompanyEntity companyEntity = this.companyRepository.findByName(companyName)
                 .orElseThrow(()-> new RuntimeException("존재하지 않는 회사명입니다."));
