@@ -4,17 +4,17 @@ import com.zb.zbstockdividends.model.Company;
 import com.zb.zbstockdividends.model.constants.CacheKey;
 import com.zb.zbstockdividends.persist.entity.CompanyEntity;
 import com.zb.zbstockdividends.service.CompanyService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -33,8 +33,8 @@ public class CompanyController {
      */
     @GetMapping("/autocomplete")
     public ResponseEntity<?> autocomplete(@RequestParam String keyword) {
-//        var result = this.companyService.autocomplete(keyword);
-        var result = this.companyService.getCompanyNamesByKeyword(keyword);
+        List<String> result = this.companyService.autocomplete(keyword);
+//        var result = this.companyService.getCompanyNamesByKeyword(keyword);
         return ResponseEntity.ok(result);
     }
 
@@ -44,7 +44,7 @@ public class CompanyController {
      * @return
      */
     @GetMapping
-//    @PreAuthorize("hasRole('READ')")
+    @PreAuthorize("hasRole('READ')")
     public ResponseEntity<?> searchCompany(final Pageable pageable) {
         Page<CompanyEntity> companies = this.companyService.getAllCompany(pageable);
         return ResponseEntity.ok(companies);
@@ -56,7 +56,7 @@ public class CompanyController {
      * @return
      */
     @PostMapping
-//    @PreAuthorize("hasRole('WRITE')")
+    @PreAuthorize("hasRole('WRITE')")
     public ResponseEntity<?> addCompany(@RequestBody Company request) {
         String ticker = request.getTicker().trim();
         if (ObjectUtils.isEmpty(ticker)) {
@@ -67,13 +67,13 @@ public class CompanyController {
         return ResponseEntity.ok(company);
     }
 
-//    @DeleteMapping("/{ticker}")
-////    @PreAuthorize("hasRole('WRITE')")
-//    public ResponseEntity<?> deleteCompany(@PathVariable String ticker) {
-//        String companyName = this.companyService.deleteCompany(ticker);
-//        this.clearFinanceCache(companyName);
-//        return ResponseEntity.ok(companyName);
-//    }
+    @DeleteMapping("/{ticker}")
+    @PreAuthorize("hasRole('WRITE')")
+    public ResponseEntity<?> deleteCompany(@PathVariable String ticker) {
+        String companyName = this.companyService.deleteCompany(ticker);
+        this.clearFinanceCache(companyName);
+        return ResponseEntity.ok(companyName);
+    }
 
     public void clearFinanceCache(String companyName) {
         this.redisCacheManager.getCache(CacheKey.KEY_FINANCE).evict(companyName);

@@ -1,0 +1,3 @@
+### 07_배당금 조회
+GET http://localhost:8080/finance/dividend/3M Company
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZCIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzA3MzI5OTI5LCJleHAiOjE3MDczMzM1Mjl9.pEX8jAkJdnhFoTtQiOFsIgPSZVpdFRxWk3m2f356zCI

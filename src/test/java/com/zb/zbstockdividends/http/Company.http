@@ -1,0 +1,16 @@
+### 05. 배당금 저장 05 - O / MMM / NKE / SPY / QQQ / DIA / COKE / APPL
+POST http://localhost:8080/company
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZCIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzA3MzI5OTI5LCJleHAiOjE3MDczMzM1Mjl9.pEX8jAkJdnhFoTtQiOFsIgPSZVpdFRxWk3m2f356zCI
+
+{
+  "ticker": "MMM"
+}
+
+### 06. 회사조회
+GET http://localhost:8080/company?size=5&page=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZCIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzA3MzI5OTI5LCJleHAiOjE3MDczMzM1Mjl9.pEX8jAkJdnhFoTtQiOFsIgPSZVpdFRxWk3m2f356zCI
+
+### C5.05 회사삭제
+DELETE http://localhost:8080/company/MMM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZCIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNzA3MzI5OTI5LCJleHAiOjE3MDczMzM1Mjl9.pEX8jAkJdnhFoTtQiOFsIgPSZVpdFRxWk3m2f356zCI

@@ -1,8 +1,6 @@
 package com.zb.zbstockdividends.web;
 
-import com.zb.zbstockdividends.model.ScrapedResult;
 import com.zb.zbstockdividends.service.FinanceService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

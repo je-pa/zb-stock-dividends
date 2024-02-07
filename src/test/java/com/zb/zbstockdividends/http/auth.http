@@ -1,0 +1,36 @@
+### 읽기 사용자
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "username": "pa",
+  "password": "wn",
+  "roles": ["ROLE_READ"]
+}
+### 읽기 쓰기 사용자
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "username": "ad",
+  "password": "wn",
+  "roles": ["ROLE_READ", "ROLE_WRITE"]
+}
+
+### 읽기 사용자 토큰
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "username": "pa",
+  "password": "wn"
+}
+
+### 읽기 쓰기 사용자 토큰
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "username": "ad",
+  "password": "wn"
+}
