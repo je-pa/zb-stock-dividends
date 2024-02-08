@@ -1,8 +1,9 @@
 package com.zb.zbstockdividends.scraper;
 
-import com.zb.zbstockdividends.model.Company;
-import com.zb.zbstockdividends.model.Dividend;
-import com.zb.zbstockdividends.model.ScrapedResult;
+import com.zb.zbstockdividends.exception.impl.UnexpectedMonthException;
+import com.zb.zbstockdividends.model.dto.Company;
+import com.zb.zbstockdividends.model.dto.Dividend;
+import com.zb.zbstockdividends.model.dto.ScrapedResult;
 import com.zb.zbstockdividends.model.constants.Month;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -55,7 +56,7 @@ public class YahooFinanceScraper implements Scraper {
                 String dividend = splits[3];
 
                 if (month < 0) {
-                    throw new RuntimeException("Unexpected Month enum value -> " + splits[0]);
+                    throw new UnexpectedMonthException();
                 }
 
                 dividends.add(Dividend.builder()

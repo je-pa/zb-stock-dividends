@@ -1,4 +1,4 @@
-package com.zb.zbstockdividends.model;
+package com.zb.zbstockdividends.model.dto;
 
 import com.zb.zbstockdividends.persist.entity.MemberEntity;
 import lombok.Data;

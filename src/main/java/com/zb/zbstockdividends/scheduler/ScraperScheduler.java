@@ -1,10 +1,10 @@
 package com.zb.zbstockdividends.scheduler;
 
-import com.zb.zbstockdividends.model.Company;
-import com.zb.zbstockdividends.model.ScrapedResult;
+import com.zb.zbstockdividends.model.dto.Company;
+import com.zb.zbstockdividends.model.dto.ScrapedResult;
 import com.zb.zbstockdividends.model.constants.CacheKey;
-import com.zb.zbstockdividends.persist.CompanyRepository;
-import com.zb.zbstockdividends.persist.DividendRepository;
+import com.zb.zbstockdividends.persist.repository.CompanyRepository;
+import com.zb.zbstockdividends.persist.repository.DividendRepository;
 import com.zb.zbstockdividends.persist.entity.CompanyEntity;
 import com.zb.zbstockdividends.persist.entity.DividendEntity;
 import com.zb.zbstockdividends.scraper.Scraper;
@@ -53,6 +53,7 @@ public class ScraperScheduler {
                         boolean exists = this.dividendRepository.existsByCompanyIdAndDate(e.getCompanyId(), e.getDate());
                         if(!exists){
                             this.dividendRepository.save(e);
+                            log.info("insert new dividend -> "+ e.toString());
                         }
                     });
 

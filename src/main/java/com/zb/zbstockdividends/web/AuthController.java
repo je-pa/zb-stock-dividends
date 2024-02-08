@@ -1,6 +1,6 @@
 package com.zb.zbstockdividends.web;
 
-import com.zb.zbstockdividends.model.Auth;
+import com.zb.zbstockdividends.model.dto.Auth;
 import com.zb.zbstockdividends.persist.entity.MemberEntity;
 import com.zb.zbstockdividends.security.TokenProvider;
 import com.zb.zbstockdividends.service.MemberService;

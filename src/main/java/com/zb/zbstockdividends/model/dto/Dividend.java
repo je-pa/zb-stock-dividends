@@ -1,4 +1,4 @@
-package com.zb.zbstockdividends.model;
+package com.zb.zbstockdividends.model.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

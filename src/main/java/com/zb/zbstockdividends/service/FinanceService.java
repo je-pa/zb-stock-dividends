@@ -1,12 +1,12 @@
 package com.zb.zbstockdividends.service;
 
 import com.zb.zbstockdividends.exception.impl.NoCompanyException;
-import com.zb.zbstockdividends.model.Company;
-import com.zb.zbstockdividends.model.Dividend;
-import com.zb.zbstockdividends.model.ScrapedResult;
+import com.zb.zbstockdividends.model.dto.Company;
+import com.zb.zbstockdividends.model.dto.Dividend;
+import com.zb.zbstockdividends.model.dto.ScrapedResult;
 import com.zb.zbstockdividends.model.constants.CacheKey;
-import com.zb.zbstockdividends.persist.CompanyRepository;
-import com.zb.zbstockdividends.persist.DividendRepository;
+import com.zb.zbstockdividends.persist.repository.CompanyRepository;
+import com.zb.zbstockdividends.persist.repository.DividendRepository;
 import com.zb.zbstockdividends.persist.entity.CompanyEntity;
 import com.zb.zbstockdividends.persist.entity.DividendEntity;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +41,5 @@ public class FinanceService {
                 .company(Company.fromEntity(companyEntity))
                 .dividends(dividendEntities.stream().map(Dividend::fromEntity).toList())
                 .build();
-
-//        throw new NotYetImplementedException();
     }
 }

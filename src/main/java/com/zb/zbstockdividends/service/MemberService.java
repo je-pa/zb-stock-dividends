@@ -1,12 +1,13 @@
 package com.zb.zbstockdividends.service;
 
 import com.zb.zbstockdividends.exception.impl.AlreadyExistUserException;
-import com.zb.zbstockdividends.model.Auth;
-import com.zb.zbstockdividends.persist.MemberRepository;
+import com.zb.zbstockdividends.exception.impl.NoUserIdException;
+import com.zb.zbstockdividends.exception.impl.UnMatchPasswordException;
+import com.zb.zbstockdividends.model.dto.Auth;
+import com.zb.zbstockdividends.persist.repository.MemberRepository;
 import com.zb.zbstockdividends.persist.entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-//import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,11 +45,11 @@ public class MemberService implements UserDetailsService {
     public MemberEntity authenticate(Auth.SignIn member) {
         // id 로 멤버 조회
         MemberEntity user = this.memberRepository.findByUsername(member.getUsername())
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 ID 입니다."));
+                .orElseThrow(() -> new NoUserIdException());
         // 패스워드 일치 여부 확인
         //      - 일치하지 않는 경우 400 status 코드와 적합한 에러 메시지 반환
         if(!this.passwordEncoder.matches(member.getPassword(), user.getPassword())){
-            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+            throw new UnMatchPasswordException();
         }
         //      - 일치하는 경우, 해당 멤버 엔티티 반환
         return user;

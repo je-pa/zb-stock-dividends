@@ -1,4 +1,4 @@
-package com.zb.zbstockdividends.persist;
+package com.zb.zbstockdividends.persist.repository;
 
 import com.zb.zbstockdividends.persist.entity.CompanyEntity;
 import org.springframework.data.domain.Page;

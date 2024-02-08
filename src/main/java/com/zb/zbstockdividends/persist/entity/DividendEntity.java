@@ -1,6 +1,6 @@
 package com.zb.zbstockdividends.persist.entity;
 
-import com.zb.zbstockdividends.model.Dividend;
+import com.zb.zbstockdividends.model.dto.Dividend;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

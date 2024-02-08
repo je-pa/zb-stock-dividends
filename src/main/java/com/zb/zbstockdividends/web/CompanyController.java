@@ -1,6 +1,7 @@
 package com.zb.zbstockdividends.web;
 
-import com.zb.zbstockdividends.model.Company;
+import com.zb.zbstockdividends.exception.impl.NoTickerException;
+import com.zb.zbstockdividends.model.dto.Company;
 import com.zb.zbstockdividends.model.constants.CacheKey;
 import com.zb.zbstockdividends.persist.entity.CompanyEntity;
 import com.zb.zbstockdividends.service.CompanyService;
@@ -60,7 +61,7 @@ public class CompanyController {
     public ResponseEntity<?> addCompany(@RequestBody Company request) {
         String ticker = request.getTicker().trim();
         if (ObjectUtils.isEmpty(ticker)) {
-            throw new RuntimeException("ticker is empty");
+            throw new NoTickerException();
         }
 
         Company company = this.companyService.save(ticker);
@@ -75,7 +76,7 @@ public class CompanyController {
         return ResponseEntity.ok(companyName);
     }
 
-    public void clearFinanceCache(String companyName) {
+    private void clearFinanceCache(String companyName) {
         this.redisCacheManager.getCache(CacheKey.KEY_FINANCE).evict(companyName);
     }
 

@@ -1,4 +1,4 @@
-package com.zb.zbstockdividends.model;
+package com.zb.zbstockdividends.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
