@@ -1,10 +1,11 @@
 package com.zb.zbstockdividends.scraper;
 
 import com.zb.zbstockdividends.exception.impl.UnexpectedMonthException;
+import com.zb.zbstockdividends.model.constants.Month;
 import com.zb.zbstockdividends.model.dto.Company;
 import com.zb.zbstockdividends.model.dto.Dividend;
 import com.zb.zbstockdividends.model.dto.ScrapedResult;
-import com.zb.zbstockdividends.model.constants.Month;
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class YahooFinanceScraper implements Scraper {
 
     private static final String STATISTICS_URL = "https://finance.yahoo.com/quote/%s/history?period1=%d&period2=%d&interval=1mo";
@@ -25,10 +27,11 @@ public class YahooFinanceScraper implements Scraper {
 
     private static final long START_TIME = 86400;   // 60 * 60 * 24
 
+    private final ScrapedResult scrapedResult;
+
     @Override
     public ScrapedResult scrap(Company company) {
-        var scrapResult = new ScrapedResult();
-        scrapResult.setCompany(company);
+        scrapedResult.setCompany(company);
 
         try {
             long now = System.currentTimeMillis() / 1000; // 초단위로
@@ -65,14 +68,14 @@ public class YahooFinanceScraper implements Scraper {
                         .build());
 
             }
-            scrapResult.setDividends(dividends);
+            scrapedResult.setDividends(dividends);
 
         } catch (IOException e) {
             // TODO error handling
             e.printStackTrace();
         }
 
-        return scrapResult;
+        return scrapedResult;
     }
 
     @Override
